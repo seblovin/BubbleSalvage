@@ -1,16 +1,36 @@
 using UnityEngine;
 
-public class PlayerView : MonoBehaviour
+namespace BubbleSalvage
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class PlayerView : MonoBehaviour
     {
-        
-    }
+        public Rigidbody rBody;
+        public float MovementSpeed = 10;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+        void FixedUpdate()
+        {
+            MovementUpdate();
+            LookAtUpdate();
+        }
+
+        void LookAtUpdate()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void MovementUpdate()
+        {
+            var inputV2 = GetInputVector();
+            var deltaTime = Time.deltaTime;
+            rBody.AddForce(inputV2 * (MovementSpeed * deltaTime));
+        }
+
+        Vector2 GetInputVector()
+        {
+            var moveHorizontal = Input.GetAxis("Horizontal");
+            var moveVertical = Input.GetAxis("Vertical");
+            return new Vector2(moveHorizontal, moveVertical);
+        }
     }
 }
