@@ -7,8 +7,14 @@ namespace BubbleSalvage
     {
         [SerializeField] private CanvasGroup _canvasGroup;
         
+        public bool IsVisible => _canvasGroup.alpha > 0;
+        
         private void OnTriggerEnter(Collider other)
         {
+            if (other == null) return;
+            
+            if (other.attachedRigidbody == null) return;
+            
             if (other.attachedRigidbody.tag == "Player")
             {
                 _canvasGroup.DOFade(1f, 1f);
