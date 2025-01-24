@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BubbleSalvage
 {
     public class PlayerView : MonoBehaviour
     {
-        public Rigidbody rBody;
+        [FormerlySerializedAs("rBody")] public Rigidbody RBody;
         public float MovementSpeed = 10;
+
+        Vector2 _lastPosition;
 
 
         void FixedUpdate()
@@ -16,14 +19,14 @@ namespace BubbleSalvage
 
         void LookAtUpdate()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         void MovementUpdate()
         {
             var inputV2 = GetInputVector();
             var deltaTime = Time.deltaTime;
-            rBody.AddForce(inputV2 * (MovementSpeed * deltaTime));
+            RBody.AddForce(inputV2 * (MovementSpeed * deltaTime));
         }
 
         Vector2 GetInputVector()
