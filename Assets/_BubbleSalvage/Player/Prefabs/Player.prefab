@@ -39756,6 +39756,7 @@ MonoBehaviour:
   RBody: {fileID: 5311591197093705081}
   MovementSpeed: 40
   RotationSpeed: 5
+  SurfaceHeight: 20
 --- !u!114 &449870837728286409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44958,7 +44959,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5184912320761820584, guid: 138cedf12be87824f9965506d0bc5bc6, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6867663163491166129, guid: 138cedf12be87824f9965506d0bc5bc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -45006,7 +45007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7774009487165176464, guid: 138cedf12be87824f9965506d0bc5bc6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
