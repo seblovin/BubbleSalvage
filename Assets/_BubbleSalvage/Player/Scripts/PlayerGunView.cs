@@ -1,3 +1,4 @@
+using System;
 using BubbleSalvage;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,11 +31,10 @@ public class PlayerGunView : MonoBehaviour
     void Update()
     {
         var aimDirection = GetAimDirection();
-        if (aimDirection.magnitude > .01f)
-        {
-            transform.rotation = Quaternion.LookRotation(_aimDirection, Vector3.up);
+        if (aimDirection.magnitude > .01f) 
             _aimDirection = aimDirection;
-        }
+        
+        transform.rotation = Quaternion.LookRotation(_aimDirection, Vector3.up);
 
         var firingActive = Input.GetButton("Fire1");
 
@@ -90,7 +90,6 @@ public class PlayerGunView : MonoBehaviour
         {
             var vertical = Input.GetAxis("LookVertical");
             var horizontal = Input.GetAxis("LookHorizontal");
-            Debug.Log($"{horizontal}, {vertical} | ");
             return new Vector2(horizontal, vertical).normalized;
         }
 
