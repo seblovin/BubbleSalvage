@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -27,6 +28,11 @@ namespace BubbleSalvage
         public bool CanScore
         {
             get => _canScore;
+        }
+
+        void LateUpdate()
+        {
+            _ballon.transform.rotation = Quaternion.identity;
         }
 
         public bool IsBalloonAttached => _isBalloonAttached;
