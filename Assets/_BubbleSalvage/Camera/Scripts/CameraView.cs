@@ -1,7 +1,7 @@
 using BubbleSalvage;
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+public class CameraView : MonoBehaviour
 {
     public PlayerView PlayerView;
     public float CameraMoveSpeed = 5f;
