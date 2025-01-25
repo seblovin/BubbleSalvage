@@ -7,6 +7,7 @@ public class PlayerGunView : MonoBehaviour
     readonly Plane _inputPlane = new(Vector3.forward, Vector3.zero);
     public float GunRadius = .5f;
     public float GunReach = 5f;
+    public float GunOffset = .5f;
     public float GunStrengthMax = 100;
     public float GunStrengthMin = 1;
 
@@ -24,7 +25,7 @@ public class PlayerGunView : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
-    void OnDrawGizmos() => DrawSphereCastGizmo(transform.position, _aimDirection, GunRadius, GunReach, Color.red);
+    void OnDrawGizmos() => DrawSphereCastGizmo(transform.position + (Vector3)(_aimDirection.normalized * GunOffset), _aimDirection, GunRadius, GunReach, Color.red);
 
     void Update()
     {
@@ -59,7 +60,7 @@ public class PlayerGunView : MonoBehaviour
         if (size > _resultsBuffer.Length) 
             Debug.LogWarning("more results than buffer size..");
 
-        var originPos = transform.position;
+        var originPos = transform.position + (Vector3)(_aimDirection.normalized * GunOffset);
 
         foreach (var hit in _resultsBuffer)
         {
