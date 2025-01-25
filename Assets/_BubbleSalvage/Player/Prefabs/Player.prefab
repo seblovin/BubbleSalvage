@@ -39666,8 +39666,8 @@ MonoBehaviour:
   GunRadius: 0.5
   GunReach: 5
   GunOffset: 0
-  GunStrengthMax: 30
-  GunStrengthMin: 20
+  GunStrengthMax: 20
+  GunStrengthMin: 10
   SetFiringActive:
     m_PersistentCalls:
       m_Calls: []
