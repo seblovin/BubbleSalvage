@@ -14,6 +14,7 @@ namespace BubbleSalvage
         [SerializeField] private float _heightToScore;
 
         private bool _canScore = true;
+        private bool _isBalloonAttached = false; 
 
         public static UnityEvent<CollectibleController> OnHeightReached = new();
 
@@ -27,6 +28,8 @@ namespace BubbleSalvage
             get => _canScore;
         }
 
+        public bool IsBalloonAttached => _isBalloonAttached;
+
         public void Raise(float force)
         {
             // change gravity to positive simulating falling down
@@ -36,6 +39,7 @@ namespace BubbleSalvage
         public void AttachBalloon()
         {
             _ballon.gameObject.SetActive(true);
+            _isBalloonAttached = true;
         }
 
         public void RemoveBalloon()
@@ -50,17 +54,18 @@ namespace BubbleSalvage
 
         private void Update()
         {
-            if (_uiController.IsVisible && Input.GetButtonDown("Jump"))
-            {
-                Raise(15);
-                AttachBalloon();
-            }
-            
             // trigger event after object reaches a certain height
             if (transform.position.y >= _heightToScore)
             {
                 OnHeightReached?.Invoke(this);
                 transform.DOScale(Vector3.zero, 1f).onComplete = () => Destroy(gameObject);
+                enabled = false;
+            }
+            
+            if (_uiController.IsVisible && !IsBalloonAttached && Input.GetButtonDown("Jump"))
+            {
+                Raise(15);
+                AttachBalloon();
             }
         }
 
