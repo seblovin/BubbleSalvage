@@ -45,6 +45,7 @@ namespace BubbleSalvage
         public void RemoveBalloon()
         {
             _ballon.gameObject.SetActive(false);
+            _isBalloonAttached = false;
         }
 
         public void RemoveForce()
