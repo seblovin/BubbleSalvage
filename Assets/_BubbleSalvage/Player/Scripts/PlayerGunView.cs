@@ -30,7 +30,10 @@ public class PlayerGunView : MonoBehaviour
     void Update()
     {
         _aimDirection = GetAimDirection();
-        transform.rotation = Quaternion.LookRotation(_aimDirection, Vector3.up);
+        if (_aimDirection.magnitude > .01f)
+        {
+            transform.rotation = Quaternion.LookRotation(_aimDirection, Vector3.up);
+        }
 
         var firingActive = Input.GetButton("Fire1");
 
