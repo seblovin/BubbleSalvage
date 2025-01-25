@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using BubbleSalvage;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -69,13 +71,18 @@ public class PlayerGunView : MonoBehaviour
 
         var originPos = transform.position + (Vector3)(_aimDirection.normalized * GunOffset);
 
+        var pushedRigidbodies = new HashSet<Rigidbody>();
         for (var index = 0; index < hits; index++)
         {
             var hit = _resultsBuffer[index];
             var hitRigidbody = hit.rigidbody;
 
-            if (hitRigidbody == null || hitRigidbody.CompareTag(PlayerView.PlayerTag))
+            if (hitRigidbody == null || 
+                hitRigidbody.CompareTag(PlayerView.PlayerTag) || 
+                !pushedRigidbodies.Add(hitRigidbody))
+            {
                 continue;
+            }
 
             var deltaPos = hitRigidbody.transform.position - originPos;
             var distanceFactor = Mathf.InverseLerp(0, GunReach, deltaPos.magnitude);

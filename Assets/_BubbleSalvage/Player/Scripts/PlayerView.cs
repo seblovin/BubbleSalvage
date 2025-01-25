@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace BubbleSalvage
 {
@@ -12,18 +13,27 @@ namespace BubbleSalvage
         public float RotationSpeed = 10;
 
         public float SurfaceHeight = 20;
-        
+
+        public Vector3 IdleRotation;
+
+        public UnityEvent OnIdle;
+        public UnityEvent OnMoving;
+
         Vector2 _currentMoveDirection;
-        
+        bool _isIdle;
+
         void FixedUpdate()
         {
             if (PlayerOxygenManager.IsDead)
                 return;
-            
+
             MovementUpdate();
             if (RBody.position.y > SurfaceHeight)
             {
-                RBody.position = new Vector3(RBody.position.x, Mathf.Min(RBody.position.y, SurfaceHeight), RBody.position.z);
+                RBody.position = new Vector3(
+                    RBody.position.x,
+                    Mathf.Min(RBody.position.y, SurfaceHeight),
+                    RBody.position.z);
                 var velocity = RBody.linearVelocity;
                 velocity.y = Mathf.Min(velocity.y, 0);
                 RBody.linearVelocity = velocity;
@@ -34,16 +44,24 @@ namespace BubbleSalvage
         {
             if (PlayerOxygenManager.IsDead)
                 return;
-            
+
             var magnitude = _currentMoveDirection.magnitude;
-            var defaultRotation = Quaternion.LookRotation(Vector3.up, transform.up);
-            
-            var targetRotation = magnitude > .01f
-                ? Quaternion.LookRotation(_currentMoveDirection, Vector3.up) 
-                : defaultRotation;
-            
-            var lerpedRoation = Quaternion.Lerp(defaultRotation, targetRotation, magnitude);
-            transform.rotation = Quaternion.Lerp(transform.rotation, lerpedRoation, RotationSpeed * Time.deltaTime);
+
+            var isIdle = magnitude < .01f;
+            var idleRotation = Quaternion.Euler(IdleRotation);
+            var targetRotation =
+                isIdle
+                    ? idleRotation
+                    : Quaternion.LookRotation(_currentMoveDirection, Vector3.up);
+
+            var lerpedRotation = Quaternion.Lerp(idleRotation, targetRotation, magnitude);
+            transform.rotation = Quaternion.Lerp(transform.rotation, lerpedRotation, RotationSpeed * Time.deltaTime);
+
+            if (isIdle != _isIdle)
+            {
+                _isIdle = isIdle;
+                (isIdle ? OnIdle : OnMoving).Invoke();
+            }
         }
 
         void MovementUpdate()
