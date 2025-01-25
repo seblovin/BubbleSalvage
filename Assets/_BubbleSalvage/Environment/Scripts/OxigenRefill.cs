@@ -3,7 +3,7 @@
 namespace BubbleSalvage
 {
     [Serializable]
-    public struct OxygenVent
+    public struct OxigenRefill
     {
         public int FillRate;
     }
