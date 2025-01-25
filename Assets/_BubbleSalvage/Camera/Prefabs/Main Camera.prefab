@@ -152,4 +152,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerView: {fileID: 0}
   CameraMoveSpeed: 2.5
-  CameraPositionOffset: {x: 0, y: 5, z: -10}
+  CameraPositionOffset: {x: 0, y: 7, z: -15}
