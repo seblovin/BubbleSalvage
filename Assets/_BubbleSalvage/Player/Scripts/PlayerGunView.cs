@@ -7,6 +7,7 @@ public class PlayerGunView : MonoBehaviour
     readonly Plane _inputPlane = new(Vector3.forward, Vector3.zero);
     public float GunRadius = .5f;
     public float GunReach = 5f;
+    public float GunOffset = .5f;
     public float GunStrengthMax = 100;
     public float GunStrengthMin = 1;
 
@@ -24,12 +25,16 @@ public class PlayerGunView : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
-    void OnDrawGizmos() => DrawSphereCastGizmo(transform.position, _aimDirection, GunRadius, GunReach, Color.red);
+    void OnDrawGizmos() => DrawSphereCastGizmo(transform.position + (Vector3)(_aimDirection.normalized * GunOffset), _aimDirection, GunRadius, GunReach, Color.red);
 
     void Update()
     {
-        _aimDirection = GetAimDirection();
-        transform.rotation = Quaternion.LookRotation(_aimDirection, Vector3.up);
+        var aimDirection = GetAimDirection();
+        if (aimDirection.magnitude > .01f)
+        {
+            transform.rotation = Quaternion.LookRotation(_aimDirection, Vector3.up);
+            _aimDirection = aimDirection;
+        }
 
         var firingActive = Input.GetButton("Fire1");
 
@@ -49,20 +54,24 @@ public class PlayerGunView : MonoBehaviour
 
     void FiringUpdate()
     {
-        var size = Physics.SphereCastNonAlloc(
+        var hits = Physics.SphereCastNonAlloc(
             transform.position,
             GunRadius,
             _aimDirection.normalized,
             _resultsBuffer,
             GunReach);
         
-        if (size > _resultsBuffer.Length) 
-            Debug.LogWarning("more results than buffer size..");
-
-        var originPos = transform.position;
-
-        foreach (var hit in _resultsBuffer)
+        if (hits > _resultsBuffer.Length)
         {
+            Debug.LogWarning("more results than buffer size..");
+            hits = _resultsBuffer.Length;
+        }
+
+        var originPos = transform.position + (Vector3)(_aimDirection.normalized * GunOffset);
+
+        for (var index = 0; index < hits; index++)
+        {
+            var hit = _resultsBuffer[index];
             var hitRigidbody = hit.rigidbody;
 
             if (hitRigidbody == null || hitRigidbody.CompareTag(PlayerView.PlayerTag))
@@ -81,6 +90,7 @@ public class PlayerGunView : MonoBehaviour
         {
             var vertical = Input.GetAxis("LookVertical");
             var horizontal = Input.GetAxis("LookHorizontal");
+            Debug.Log($"{horizontal}, {vertical} | ");
             return new Vector2(horizontal, vertical).normalized;
         }
 

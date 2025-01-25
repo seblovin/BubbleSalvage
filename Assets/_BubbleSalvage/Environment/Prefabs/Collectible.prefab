@@ -57,7 +57,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -723,8 +723,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiController: {fileID: 6036856792988340863}
   _constantForce: {fileID: 9126237009410583122}
-  _collectibleScore: 0
+  _score: 500
   _ballon: {fileID: 1408892472988929242}
+  _heightToScore: 15
 --- !u!75 &9126237009410583122
 ConstantForce:
   m_ObjectHideFlags: 0
