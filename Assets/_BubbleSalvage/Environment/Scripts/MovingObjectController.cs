@@ -13,6 +13,12 @@ namespace BubbleSalvage
         
         private void Start()
         {
+            // no movement if there are no targets
+            if (target.Length == 0)
+            {
+                return;
+            }
+            
             // t / target.Length isn't the best way to calculate the time to move and keep it within the magnitude, but it works
             transform.DOMove(target[0].position, TimeToMove / target.Length).onComplete = OnComplete;
         }

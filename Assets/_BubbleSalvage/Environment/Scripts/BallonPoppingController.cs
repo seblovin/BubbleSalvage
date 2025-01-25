@@ -1,0 +1,26 @@
+﻿using UnityEngine;
+
+namespace BubbleSalvage
+{
+    public class BallonPoppingController : MonoBehaviour
+    {
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other == null) return;
+
+            if (other.attachedRigidbody == null) return;
+
+            if (other.attachedRigidbody.tag == "PlayerBallon")
+            {
+                // find collectible controller
+                var collectibleController = other.gameObject.GetComponentInParent<CollectibleController>();
+                
+                if (collectibleController == null) return;
+                
+                // remove force
+                collectibleController.RemoveForce();
+                collectibleController.RemoveBalloon();
+            }
+        }
+    }
+}
