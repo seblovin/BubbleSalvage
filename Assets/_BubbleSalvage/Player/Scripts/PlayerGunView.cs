@@ -29,10 +29,11 @@ public class PlayerGunView : MonoBehaviour
 
     void Update()
     {
-        _aimDirection = GetAimDirection();
-        if (_aimDirection.magnitude > .01f)
+        var aimDirection = GetAimDirection();
+        if (aimDirection.magnitude > .01f)
         {
             transform.rotation = Quaternion.LookRotation(_aimDirection, Vector3.up);
+            _aimDirection = aimDirection;
         }
 
         var firingActive = Input.GetButton("Fire1");
@@ -53,20 +54,24 @@ public class PlayerGunView : MonoBehaviour
 
     void FiringUpdate()
     {
-        var size = Physics.SphereCastNonAlloc(
+        var hits = Physics.SphereCastNonAlloc(
             transform.position,
             GunRadius,
             _aimDirection.normalized,
             _resultsBuffer,
             GunReach);
         
-        if (size > _resultsBuffer.Length) 
+        if (hits > _resultsBuffer.Length)
+        {
             Debug.LogWarning("more results than buffer size..");
+            hits = _resultsBuffer.Length;
+        }
 
         var originPos = transform.position + (Vector3)(_aimDirection.normalized * GunOffset);
 
-        foreach (var hit in _resultsBuffer)
+        for (var index = 0; index < hits; index++)
         {
+            var hit = _resultsBuffer[index];
             var hitRigidbody = hit.rigidbody;
 
             if (hitRigidbody == null || hitRigidbody.CompareTag(PlayerView.PlayerTag))
@@ -85,6 +90,7 @@ public class PlayerGunView : MonoBehaviour
         {
             var vertical = Input.GetAxis("LookVertical");
             var horizontal = Input.GetAxis("LookHorizontal");
+            Debug.Log($"{horizontal}, {vertical} | ");
             return new Vector2(horizontal, vertical).normalized;
         }
 
