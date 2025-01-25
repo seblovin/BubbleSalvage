@@ -5,7 +5,8 @@ namespace BubbleSalvage
     public class PlayerView : MonoBehaviour
     {
         public const string PlayerTag = "Player";
-        
+
+        public PlayerOxygenManager PlayerOxygenManager;
         public Rigidbody RBody;
         public float MovementSpeed = 10;
         public float RotationSpeed = 10;
@@ -14,11 +15,17 @@ namespace BubbleSalvage
         
         void FixedUpdate()
         {
+            if (PlayerOxygenManager.IsDead)
+                return;
+            
             MovementUpdate();
         }
 
         void Update()
         {
+            if (PlayerOxygenManager.IsDead)
+                return;
+            
             var magnitude = _currentMoveDirection.magnitude;
             var defaultRotation = Quaternion.LookRotation(Vector3.up, transform.up);
             

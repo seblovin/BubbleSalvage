@@ -12,9 +12,10 @@ namespace BubbleSalvage
         [SerializeField] private int _score;
         [SerializeField] private GameObject _ballon;
         [SerializeField] private float _heightToScore;
+        [SerializeField] private float _oxygenRequiredToAttach = 1f;
 
         private bool _canScore = true;
-        private bool _isBalloonAttached = false; 
+        private bool _isBalloonAttached = false;
 
         public static UnityEvent<CollectibleController> OnHeightReached = new();
 
@@ -38,8 +39,11 @@ namespace BubbleSalvage
 
         public void AttachBalloon()
         {
-            _ballon.gameObject.SetActive(true);
-            _isBalloonAttached = true;
+            if (PlayerOxygenManager.Instance.TryConsumeOxygen(_oxygenRequiredToAttach))
+            {
+                _ballon.gameObject.SetActive(true);
+                _isBalloonAttached = true;
+            }
         }
 
         public void RemoveBalloon()
@@ -62,7 +66,7 @@ namespace BubbleSalvage
                 transform.DOScale(Vector3.zero, 1f).onComplete = () => Destroy(gameObject);
                 enabled = false;
             }
-            
+
             if (_uiController.IsVisible && !IsBalloonAttached && Input.GetButtonDown("Jump"))
             {
                 Raise(15);
