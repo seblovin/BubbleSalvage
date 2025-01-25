@@ -23,6 +23,10 @@ namespace BubbleSalvage
 
         private void OnTriggerExit(Collider other)
         {
+            if (other == null) return;
+            
+            if (other.attachedRigidbody == null) return;
+            
             if (other.attachedRigidbody.tag == "Player")
             {
                 _canvasGroup.DOFade(0f, 1f);
