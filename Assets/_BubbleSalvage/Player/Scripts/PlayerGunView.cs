@@ -38,7 +38,6 @@ public class PlayerGunView : MonoBehaviour
             _isFiringActive = firingActive;
             (_isFiringActive ? OnFiring : OnNotFiring)?.Invoke();
             SetFiringActive?.Invoke(_isFiringActive);
-            Debug.Log($"Firing {_isFiringActive}");
         }
     }
 

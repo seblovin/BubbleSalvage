@@ -1,15 +1,15 @@
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace BubbleSalvage
 {
     public class PlayerView : MonoBehaviour
     {
         public const string PlayerTag = "Player";
-        [FormerlySerializedAs("rBody")] public Rigidbody RBody;
+        
+        public Rigidbody RBody;
         public float MovementSpeed = 10;
         public float RotationSpeed = 10;
+        
         Vector2 _currentMoveDirection;
         
         void FixedUpdate()
@@ -33,10 +33,9 @@ namespace BubbleSalvage
         void MovementUpdate()
         {
             var inputV2 = GetInputVector();
-            var deltaTime = Time.deltaTime;
+            var mass = RBody.mass;
             _currentMoveDirection = inputV2;
-            
-            RBody.AddForce(inputV2 * (MovementSpeed * deltaTime));
+            RBody.AddForce(inputV2 * (MovementSpeed * mass));
         }
 
         Vector2 GetInputVector()
