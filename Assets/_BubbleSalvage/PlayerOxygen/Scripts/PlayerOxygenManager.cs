@@ -1,5 +1,8 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace BubbleSalvage
 {
@@ -8,19 +11,24 @@ namespace BubbleSalvage
         public static PlayerOxygenManager Instance;
 
         public float CurrentOxygen { get; private set; }
+        public bool IsDead { get; private set; } = false;
+
         public float MaxOxygen;
         public float OxygenDepletionRate = .5f;
 
         public Transform OxygenContainerParent;
         public Transform OxygenBar;
+        public UnityEvent OnDead;
         
         public Vector3 OxygenBarMinScale = new(1, 0, 1);
         public Vector3 OxygenBarMaxScale = new(1, 1, 1);
         Vector3 _lastOxygenContainerPos;
+        
 
         void Awake()
         {
             Instance = this;
+            IsDead = false;
             CurrentOxygen = MaxOxygen;
         }
 
@@ -31,6 +39,12 @@ namespace BubbleSalvage
 
         void Update()
         {
+            if (IsDead)
+            {
+                if (Input.anyKeyDown) 
+                    ReloadScene();
+                return;
+            }
             // oxygenDepletion
             UpdateOxygenDepletion();
             UpdateOxygenBar();
@@ -41,10 +55,18 @@ namespace BubbleSalvage
             CurrentOxygen -= OxygenDepletionRate * Time.deltaTime;
             if (CurrentOxygen < 0)
             {
-                Debug.Log("OUT OF OXYGEN");
+                Die();
             }
             
         }
+
+        void Die()
+        {
+            IsDead = true;
+            OnDead?.Invoke();
+        }
+
+        void ReloadScene() => SceneManager.LoadScene(0);
 
         void UpdateOxygenBar()
         {
