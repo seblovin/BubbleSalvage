@@ -345,6 +345,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5099837202520744423, guid: 69f382f678f97874283a0b27dc6dce9d, type: 3}
+      propertyPath: _distanceLimit
+      value: 2.8
+      objectReference: {fileID: 0}
     - target: {fileID: 7092708771401900863, guid: 69f382f678f97874283a0b27dc6dce9d, type: 3}
       propertyPath: m_Name
       value: TargetsPanel
