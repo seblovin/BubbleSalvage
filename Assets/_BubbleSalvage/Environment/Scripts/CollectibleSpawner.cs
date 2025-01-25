@@ -58,6 +58,8 @@ namespace BubbleSalvage
             var collectiblePrefab = _collectiblePrefabs[UnityEngine.Random.Range(0, _collectiblePrefabs.Length)];
             // instantiate collectible
             var collectible = Instantiate(collectiblePrefab, spawnPoint.Point.position, Quaternion.identity).GetComponent<CollectibleController>();
+            // reparent collectible
+            collectible.transform.SetParent(transform);
             // set collectible reference
             spawnPoint.Collectible = collectible;
             // add entry to collection
