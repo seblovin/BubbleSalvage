@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BubbleSalvage
 {
-    public class OxygenVentController : MonoBehaviour
+    public class OxygenRefillController : MonoBehaviour
     {
         [SerializeField] private PlayerView _player;
-        [SerializeField] private OxygenVent _oxygenVent;
+        [SerializeField] private OxigenRefill _oxigenRefill;
         
         public void FillOxygen()
         {

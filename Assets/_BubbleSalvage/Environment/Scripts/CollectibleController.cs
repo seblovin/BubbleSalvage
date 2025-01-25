@@ -1,5 +1,4 @@
-﻿using System;
-using NaughtyAttributes;
+﻿using NaughtyAttributes;
 using UnityEngine;
 
 namespace BubbleSalvage
@@ -8,12 +7,28 @@ namespace BubbleSalvage
     {
         [SerializeField] private CollectibleUIController _uiController;
         [SerializeField] private ConstantForce _constantForce;
-        [SerializeField] private Collectible _collectible;
+        [SerializeField] private int _collectibleScore;
+        [SerializeField] private GameObject _ballon;
 
         public void Raise(float force)
         {
             // change gravity to positive simulating falling down
             _constantForce.force = new Vector3(0, force, 0);
+        }
+        
+        public void AttachBalloon()
+        {
+            _ballon.gameObject.SetActive(true);
+        }
+        
+        public void RemoveBalloon()
+        {
+            _ballon.gameObject.SetActive(false);
+        }
+
+        public void RemoveForce()
+        {
+            _constantForce.force = Vector3.zero;
         }
 
         private void Update()
@@ -21,6 +36,7 @@ namespace BubbleSalvage
             if (_uiController.IsVisible && Input.GetButtonDown("Jump"))
             {
                 Raise(15);
+                AttachBalloon();
             }
         }
 
