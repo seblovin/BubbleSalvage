@@ -49,6 +49,7 @@ namespace BubbleSalvage
             {
                 _ballon.gameObject.SetActive(true);
                 _isBalloonAttached = true;
+                _uiController.ToggleCanvasActivation(false);
             }
         }
 
@@ -56,6 +57,7 @@ namespace BubbleSalvage
         {
             _ballon.gameObject.SetActive(false);
             _isBalloonAttached = false;
+            _uiController.ToggleCanvasActivation(true, false);
         }
 
         public void RemoveForce()
