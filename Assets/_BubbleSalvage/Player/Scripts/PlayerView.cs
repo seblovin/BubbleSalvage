@@ -10,6 +10,8 @@ namespace BubbleSalvage
         public Rigidbody RBody;
         public float MovementSpeed = 10;
         public float RotationSpeed = 10;
+
+        public float SurfaceHeight = 20;
         
         Vector2 _currentMoveDirection;
         
@@ -19,6 +21,13 @@ namespace BubbleSalvage
                 return;
             
             MovementUpdate();
+            if (RBody.position.y > SurfaceHeight)
+            {
+                RBody.position = new Vector3(RBody.position.x, Mathf.Min(RBody.position.y, SurfaceHeight), RBody.position.z);
+                var velocity = RBody.linearVelocity;
+                velocity.y = Mathf.Min(velocity.y, 0);
+                RBody.linearVelocity = velocity;
+            }
         }
 
         void Update()
