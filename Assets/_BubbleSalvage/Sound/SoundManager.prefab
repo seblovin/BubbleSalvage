@@ -53,12 +53,12 @@ MonoBehaviour:
   - _name: Background
     _clip: {fileID: 8300000, guid: 9ff44802a95dbae4596aadf3f023f780, type: 3}
     _loop: 1
-    _playAtAwake: 1
+    _playAtAwake: 0
     _volume: 0.5
   - _name: Background2
     _clip: {fileID: 8300000, guid: 70a1882f8c0b9a147b19137bd5378e34, type: 3}
     _loop: 1
-    _playAtAwake: 1
+    _playAtAwake: 0
     _volume: 1
   _randomizedGameSounds:
   - _name: BalloonInflate
@@ -71,3 +71,11 @@ MonoBehaviour:
     _loop: 0
     _playAtAwake: 0
     _volume: 0.7
+  - _name: LackOxygen
+    _clips:
+    - {fileID: 8300000, guid: d85a508f28c05f1479f871b780bec1fc, type: 3}
+    - {fileID: 8300000, guid: 000ab9fbca047594eb5cadd93573f009, type: 3}
+    - {fileID: 8300000, guid: ed4d70de75efcff47922b9360b19f757, type: 3}
+    _loop: 0
+    _playAtAwake: 0
+    _volume: 0.8
