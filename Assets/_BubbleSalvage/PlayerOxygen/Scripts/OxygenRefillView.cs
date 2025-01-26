@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _BubbleSalvage.Sound.Scripts;
 using UnityEngine;
 
 namespace BubbleSalvage
@@ -23,8 +24,11 @@ namespace BubbleSalvage
         void OnTriggerEnter(Collider other)
         {
             var playerOxygenManager = other.GetComponentInParent<PlayerOxygenManager>();
-            if (playerOxygenManager) 
+            if (playerOxygenManager)
+            {
                 _refillingPlayers.Add(playerOxygenManager);
+                SoundManager.Instance.PlaySound("AirRefill");
+            }
         }
 
         void OnTriggerExit(Collider other)

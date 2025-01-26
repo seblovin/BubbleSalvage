@@ -87,4 +87,12 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 93eb3588866ff824fbe642e4286141f9, type: 3}
     _loop: 0
     _playAtAwake: 0
+    _volume: 0.65
+  - _name: AirRefill
+    _clips:
+    - {fileID: 8300000, guid: 6effc8e42911c6148a8794227b23c107, type: 3}
+    - {fileID: 8300000, guid: 76f888763d92c4b4b855973a9b76c342, type: 3}
+    - {fileID: 8300000, guid: b5a66e4f8cff71f418c59db0182d746d, type: 3}
+    _loop: 0
+    _playAtAwake: 0
     _volume: 0.8
