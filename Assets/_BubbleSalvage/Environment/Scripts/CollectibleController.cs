@@ -4,6 +4,7 @@ using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 namespace BubbleSalvage
 {
@@ -18,6 +19,7 @@ namespace BubbleSalvage
         [SerializeField] private UnityEvent _onHeightReached;
         [SerializeField] private UnityEvent _onBallonAttached;
         [SerializeField] private UnityEvent _onBallonRemoved;
+        [SerializeField] private VisualEffect _visualEffect;
 
         private bool _canScore = true;
         private bool _isBalloonAttached = false;
@@ -65,6 +67,8 @@ namespace BubbleSalvage
             _isBalloonAttached = false;
             _uiController.ToggleCanvasActivation(true, false);
             _onBallonRemoved?.Invoke();
+            _visualEffect.enabled = true;
+            _visualEffect?.Play();
         }
 
         public void RemoveForce()
