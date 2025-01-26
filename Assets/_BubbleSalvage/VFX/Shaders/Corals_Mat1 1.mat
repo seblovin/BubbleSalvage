@@ -47,7 +47,7 @@ Material:
     - _WaterScale: 17.7
     m_Colors:
     - _BottomColor: {r: 0.9843137, g: 0.03841144, b: 0, a: 1}
-    - _Color: {r: 4.211524, g: 4.594794, b: 0.91028875, a: 1}
+    - _Color: {r: 2.6324546, g: 2.835718, b: 0.7624336, a: 1}
     - _TextureRockTiling: {r: 1, g: 1, b: 0, a: 0}
     - _Texture_Speed: {r: 0, g: -0.01, b: 0, a: 0}
     - _TopColor: {r: 0.9912359, g: 1, b: 0.26819396, a: 1}
