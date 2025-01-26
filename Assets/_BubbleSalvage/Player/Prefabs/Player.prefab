@@ -39589,6 +39589,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: _BubbleSalvage.Sound.Scripts.SoundManager, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: BuubleGun
+          m_BoolArgument: 0
+        m_CallState: 2
   OnNotFiring:
     m_PersistentCalls:
       m_Calls:
@@ -39616,6 +39628,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: _BubbleSalvage.Sound.Scripts.SoundManager, Assembly-CSharp
+        m_MethodName: StopSound
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: BuubleGun
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &6730954022504664394
 GameObject:
   m_ObjectHideFlags: 0
@@ -39629,6 +39653,7 @@ GameObject:
   - component: {fileID: 449870837728286409}
   - component: {fileID: 5311591197093705081}
   - component: {fileID: 8147760760375064729}
+  - component: {fileID: 1768179120521288640}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -39776,6 +39801,14 @@ ConstantForce:
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
+--- !u!81 &1768179120521288640
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730954022504664394}
+  m_Enabled: 1
 --- !u!1 &6793841562376390863
 GameObject:
   m_ObjectHideFlags: 0
