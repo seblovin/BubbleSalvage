@@ -954,6 +954,15 @@ MonoBehaviour:
   _ballon: {fileID: 7947368859010312903}
   _heightToScore: 20
   _oxygenRequiredToAttach: 1
+  _onHeightReached:
+    m_PersistentCalls:
+      m_Calls: []
+  _onBallonAttached:
+    m_PersistentCalls:
+      m_Calls: []
+  _onBallonRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!75 &9126237009410583122
 ConstantForce:
   m_ObjectHideFlags: 0

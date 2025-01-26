@@ -47,7 +47,7 @@ namespace BubbleSalvage
 
             var moveMagnitude = _currentMoveDirection.magnitude;
 
-            var isIdle = moveMagnitude < .01f;
+            var isIdle = moveMagnitude < .1f;
             var idleRotation = Quaternion.Euler(IdleRotation);
 
             Quaternion targetRotation;
