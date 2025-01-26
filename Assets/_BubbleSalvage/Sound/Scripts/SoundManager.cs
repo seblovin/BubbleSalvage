@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,8 +60,14 @@ namespace _BubbleSalvage.Sound.Scripts
             }
         }
 
-        public void PlaySound(AudioClip clip, bool loop = false, float volume = 1f)
+        public void PlaySound(AudioClip clip, bool loop = false, float volume = 1f, float delayToStop = 0f)
         {
+            // check if the sound is already playing
+            if (_soundSources.Exists(source => source.GetComponent<AudioSource>().clip == clip))
+            {
+                return;
+            }
+            
             GameObject soundSource = new GameObject("SoundSource");
             AudioSource audioSource = soundSource.AddComponent<AudioSource>();
             audioSource.clip = clip;
@@ -71,9 +78,28 @@ namespace _BubbleSalvage.Sound.Scripts
 
             // reparent sound sources to sound manager
             soundSource.transform.SetParent(transform);
+            
+            // if not looping stop on audio clip end
+            if (!loop)
+            {
+                StartCoroutine(StopSoundOnEnd(audioSource, delayToStop));
+            }
         }
 
-        public void PlaySound(string name)
+        private IEnumerator StopSoundOnEnd(AudioSource audioSource, float delayToStop)
+        {
+            // wait for delay
+            yield return new WaitForSeconds(delayToStop);
+            
+            while (audioSource.isPlaying)
+            {
+                yield return null;
+            }
+
+            StopSound(audioSource.clip);
+        }
+
+        public void PlaySound(string name, float delayToStop = 0f)
         {
             IGameSound gameSound = Array.Find(_gameSounds, sound => sound.Name == name);
 
@@ -91,7 +117,7 @@ namespace _BubbleSalvage.Sound.Scripts
                 gameSound = randomGameSound;
             }
 
-            PlaySound(gameSound.Clip, gameSound.Loop, gameSound.Volume);
+            PlaySound(gameSound.Clip, gameSound.Loop, gameSound.Volume, delayToStop);
         }
 
         // stop sound
