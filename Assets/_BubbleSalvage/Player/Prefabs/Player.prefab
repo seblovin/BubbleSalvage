@@ -39809,6 +39809,8 @@ MonoBehaviour:
   OxygenBarMinScale: {x: 1, y: 0, z: 1}
   OxygenBarMaxScale: {x: 1, y: 1, z: 1}
   _timeAllowedAfterDeath: 1.5
+  LackOxygenSoundMinimum: 3.5
+  LackOxygenSoundInterval: 1.1
 --- !u!54 &5311591197093705081
 Rigidbody:
   m_ObjectHideFlags: 0

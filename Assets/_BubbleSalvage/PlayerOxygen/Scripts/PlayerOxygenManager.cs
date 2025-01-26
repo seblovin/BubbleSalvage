@@ -1,4 +1,5 @@
 using System;
+using _BubbleSalvage.Sound.Scripts;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,6 +31,9 @@ namespace BubbleSalvage
         
         public float _timeAllowedAfterDeath = 1.5f;
         
+        [Header("Sound")]
+        public float LackOxygenSoundMinimum = 2f;
+        public float LackOxygenSoundInterval = 2f;
 
         void Awake()
         {
@@ -70,6 +74,19 @@ namespace BubbleSalvage
                 HalfToQuaterOxygen?.Invoke();
             else
                 QuaterToEmptyOxygen?.Invoke();
+            
+            // check if we need to trigger sound
+            if (CurrentOxygen < LackOxygenSoundMinimum)
+            {
+                // increase our interval
+                LackOxygenSoundInterval -= Time.deltaTime;
+
+                if (LackOxygenSoundInterval < 0)
+                {
+                    LackOxygenSoundInterval = LackOxygenSoundMinimum;
+                    SoundManager.Instance.PlaySound("LackOxygen");
+                }
+            }
         }
 
         void UpdateOxygenDepletion()
