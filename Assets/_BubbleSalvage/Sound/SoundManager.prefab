@@ -79,3 +79,12 @@ MonoBehaviour:
     _loop: 0
     _playAtAwake: 0
     _volume: 0.8
+  - _name: BalloonPop
+    _clips:
+    - {fileID: 8300000, guid: 90c8b85b8c8608b42bcf0ef83f7b6c5f, type: 3}
+    - {fileID: 8300000, guid: 1511deae86058cb4f8e713e5fe3cffd3, type: 3}
+    - {fileID: 8300000, guid: e7ad8e9a1c08fe746bcbbf1c4dec7ce0, type: 3}
+    - {fileID: 8300000, guid: 93eb3588866ff824fbe642e4286141f9, type: 3}
+    _loop: 0
+    _playAtAwake: 0
+    _volume: 0.8
