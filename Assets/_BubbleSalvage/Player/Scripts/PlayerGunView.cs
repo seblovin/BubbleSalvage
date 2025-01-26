@@ -4,6 +4,7 @@ using BubbleSalvage;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class PlayerGunView : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class PlayerGunView : MonoBehaviour
         
         transform.rotation = Quaternion.LookRotation(_aimDirection, Vector3.up);
 
-        var firingActive = Input.GetButton("Fire1");
+        var firingActive = Input.GetButton("Fire1") || (Gamepad.current?.rightTrigger?.isPressed ?? false);
 
         if (_isFiringActive != firingActive)
         {
@@ -97,7 +98,8 @@ public class PlayerGunView : MonoBehaviour
         {
             var vertical = Input.GetAxis("LookVertical");
             var horizontal = Input.GetAxis("LookHorizontal");
-            return new Vector2(horizontal, vertical).normalized;
+            var vector2 = new Vector2(horizontal, vertical);
+            return vector2.magnitude > .01f? vector2.normalized : _aimDirection;
         }
 
         var mouseRay = _mainCamera.ScreenPointToRay(Input.mousePosition);

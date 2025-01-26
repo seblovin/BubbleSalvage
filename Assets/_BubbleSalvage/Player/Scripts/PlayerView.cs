@@ -45,16 +45,28 @@ namespace BubbleSalvage
             if (PlayerOxygenManager.IsDead)
                 return;
 
-            var magnitude = _currentMoveDirection.magnitude;
+            var moveMagnitude = _currentMoveDirection.magnitude;
 
-            var isIdle = magnitude < .01f;
+            var isIdle = moveMagnitude < .01f;
             var idleRotation = Quaternion.Euler(IdleRotation);
-            var targetRotation =
-                isIdle
-                    ? idleRotation
-                    : Quaternion.LookRotation(_currentMoveDirection, Vector3.up);
 
-            var lerpedRotation = Quaternion.Lerp(idleRotation, targetRotation, magnitude);
+            Quaternion targetRotation;
+
+            if (isIdle)
+            {
+                targetRotation = idleRotation;
+            }
+            else
+            {
+                var moveX = _currentMoveDirection.x;
+                var lookUp = Mathf.Abs(moveX) * Vector3.up;
+
+                var moveY = _currentMoveDirection.y;
+                lookUp += moveY > 0 ? moveY * Vector3.forward : -moveY * Vector3.back;
+                targetRotation = Quaternion.LookRotation(_currentMoveDirection, lookUp.normalized);
+            }
+
+            var lerpedRotation = Quaternion.Lerp(idleRotation, targetRotation, moveMagnitude);
             transform.rotation = Quaternion.Lerp(transform.rotation, lerpedRotation, RotationSpeed * Time.deltaTime);
 
             if (isIdle != _isIdle)
@@ -72,7 +84,7 @@ namespace BubbleSalvage
             RBody.AddForce(inputV2 * (MovementSpeed * mass));
         }
 
-        Vector2 GetInputVector()
+        static Vector2 GetInputVector()
         {
             var moveHorizontal = Input.GetAxis("Horizontal");
             var moveVertical = Input.GetAxis("Vertical");
