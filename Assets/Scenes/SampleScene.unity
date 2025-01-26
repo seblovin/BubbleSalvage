@@ -2388,6 +2388,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8520559969766958964, guid: 6b72d1a9f06ce8343b0a7e59181d0d22, type: 3}
+      propertyPath: _timeToSync
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8520559969766958964, guid: 6b72d1a9f06ce8343b0a7e59181d0d22, type: 3}
+      propertyPath: _timeToDisplayScore
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9052916688082986677, guid: 6b72d1a9f06ce8343b0a7e59181d0d22, type: 3}
+      propertyPath: m_text
+      value: 0$
+      objectReference: {fileID: 0}
+    - target: {fileID: 9052916688082986677, guid: 6b72d1a9f06ce8343b0a7e59181d0d22, type: 3}
+      propertyPath: m_fontSize
+      value: 25.65
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3639,6 +3655,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: _gameSounds.Array.data[0]._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a349f2f451d5d4c4c86382483e8cb957, type: 3}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: _gameSounds.Array.data[0]._name
+      value: BuubleGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: _gameSounds.Array.data[1]._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ff44802a95dbae4596aadf3f023f780, type: 3}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: _gameSounds.Array.data[1]._name
+      value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: _randomizedGameSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: _randomizedGameSounds.Array.data[0]._name
+      value: BalloonInflate
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: _randomizedGameSounds.Array.data[0]._volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: _randomizedGameSounds.Array.data[0]._clips.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: '_randomizedGameSounds.Array.data[0]._clips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ffc2b091ac9a07f46947b7d1bed673c6, type: 3}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: '_randomizedGameSounds.Array.data[0]._clips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: e358337039582c24f9fcadf0bd964453, type: 3}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: '_randomizedGameSounds.Array.data[0]._clips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4fbb5ecdea2afe64292202effa4f7103, type: 3}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: '_randomizedGameSounds.Array.data[0]._clips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: deef290fe7e917b418e1d619371b30b0, type: 3}
+    - target: {fileID: 7423943932487466925, guid: 033029aa216894c44976a563acd51906, type: 3}
+      propertyPath: '_randomizedGameSounds.Array.data[0]._clips.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 6cf76a202e76402429942af7e57689cd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

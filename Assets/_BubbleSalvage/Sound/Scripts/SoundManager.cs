@@ -4,22 +4,15 @@ using UnityEngine;
 
 namespace _BubbleSalvage.Sound.Scripts
 {
-    [Serializable]
-    public class GameSound
-    {
-        public string Name;
-        public AudioClip Clip;
-        public bool Loop;
-    }
-    
     public class SoundManager : MonoBehaviour
     {
         [SerializeField] private GameSound[] _gameSounds = Array.Empty<GameSound>();
-        private List<GameObject> _soundSources = new List<GameObject>();
-        
+        [SerializeField] private RandomGameSound[] _randomizedGameSounds = Array.Empty<RandomGameSound>();
+        private List<GameObject> _soundSources = new();
+
         // create singleton pattern
         private static SoundManager _instance;
-        
+
         public static SoundManager Instance
         {
             get
@@ -33,10 +26,31 @@ namespace _BubbleSalvage.Sound.Scripts
                         _instance = go.AddComponent<SoundManager>();
                     }
                 }
+
                 return _instance;
             }
         }
-        
+
+        private void Awake()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
+            foreach (var gameSound in _gameSounds)
+            {
+                if (gameSound.PlayAtAwake)
+                {
+                    PlaySound(gameSound.Name);
+                }
+            }
+        }
+
         public void PlaySound(AudioClip clip, bool loop = false)
         {
             GameObject soundSource = new GameObject("SoundSource");
@@ -45,49 +59,70 @@ namespace _BubbleSalvage.Sound.Scripts
             audioSource.loop = loop;
             audioSource.Play();
             _soundSources.Add(soundSource);
-            
+
             // reparent sound sources to sound manager
             soundSource.transform.SetParent(transform);
         }
-        
+
         public void PlaySound(string name)
         {
-            GameSound gameSound = Array.Find(_gameSounds, sound => sound.Name == name);
-            
+            IGameSound gameSound = Array.Find(_gameSounds, sound => sound.Name == name);
+
             if (gameSound == null)
             {
-                Debug.LogWarning("Sound: " + name + " not found!");
-                return;
+                // try within randomized sounds
+                RandomGameSound randomGameSound = Array.Find(_randomizedGameSounds, sound => sound.Name == name);
+
+                if (randomGameSound == null)
+                {
+                    Debug.LogWarning("Sound: " + name + " not found!");
+                    return;
+                }
+                
+                gameSound = randomGameSound;
             }
-            
+
             PlaySound(gameSound.Clip, gameSound.Loop);
         }
-        
+
         // stop sound
         public void StopSound(AudioClip clip)
         {
             GameObject soundSource = _soundSources.Find(source => source.GetComponent<AudioSource>().clip == clip);
-            if (soundSource == null) return;
-            
+
+            if (soundSource == null)
+            {
+                Debug.LogWarning("Sound: " + clip.name + " not found!");
+                return;
+            }
+
             AudioSource audioSource = soundSource.GetComponent<AudioSource>();
             audioSource.Stop();
             _soundSources.Remove(soundSource);
             Destroy(soundSource);
         }
-        
+
         public void StopSound(string name)
         {
-            GameSound gameSound = Array.Find(_gameSounds, sound => sound.Name == name);
-            
+            IGameSound gameSound = Array.Find(_gameSounds, sound => sound.Name == name);
+
             if (gameSound == null)
             {
-                Debug.LogWarning("Sound: " + name + " not found!");
-                return;
+                // try with randomized sounds
+                RandomGameSound randomGameSound = Array.Find(_randomizedGameSounds, sound => sound.Name == name);
+
+                if (randomGameSound == null)
+                {
+                    Debug.LogWarning("Sound: " + name + " not found!");
+                    return;
+                }
+                
+                gameSound = randomGameSound;
             }
-            
+
             StopSound(gameSound.Clip);
         }
-        
+
         // stop all sounds
         public void StopAllSounds()
         {
@@ -97,6 +132,7 @@ namespace _BubbleSalvage.Sound.Scripts
                 audioSource.Stop();
                 Destroy(soundSource);
             }
+
             _soundSources.Clear();
         }
     }

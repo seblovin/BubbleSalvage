@@ -1,4 +1,5 @@
 ﻿using System;
+using _BubbleSalvage.Sound.Scripts;
 using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
@@ -14,6 +15,9 @@ namespace BubbleSalvage
         [SerializeField] private GameObject _ballon;
         [SerializeField] private float _heightToScore;
         [SerializeField] private float _oxygenRequiredToAttach = 1f;
+        [SerializeField] private UnityEvent _onHeightReached;
+        [SerializeField] private UnityEvent _onBallonAttached;
+        [SerializeField] private UnityEvent _onBallonRemoved;
 
         private bool _canScore = true;
         private bool _isBalloonAttached = false;
@@ -50,6 +54,8 @@ namespace BubbleSalvage
                 _ballon.gameObject.SetActive(true);
                 _isBalloonAttached = true;
                 _uiController.ToggleCanvasActivation(false);
+                SoundManager.Instance.PlaySound("BalloonInflate");
+                _onBallonAttached?.Invoke();
             }
         }
 
@@ -58,6 +64,7 @@ namespace BubbleSalvage
             _ballon.gameObject.SetActive(false);
             _isBalloonAttached = false;
             _uiController.ToggleCanvasActivation(true, false);
+            _onBallonRemoved?.Invoke();
         }
 
         public void RemoveForce()
