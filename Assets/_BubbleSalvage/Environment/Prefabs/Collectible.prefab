@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 77084613700636768}
   m_Layer: 0
   m_Name: Capsule (1)
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 1032037671382291609}
   m_Layer: 0
   m_Name: Explosion
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 2191903500814533262}
   m_Layer: 0
   m_Name: VFX
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 7849017350323587871}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 6774490507664430547}
   m_Layer: 0
   m_Name: Baloon
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 6036856792988340863}
   m_Layer: 0
   m_Name: DetectionArea
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -590,7 +590,7 @@ GameObject:
   - component: {fileID: 1477089373471732443}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -664,7 +664,7 @@ GameObject:
   - component: {fileID: 8420268218463716019}
   m_Layer: 0
   m_Name: Baloon
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: 3996460929133208416}
   m_Layer: 0
   m_Name: UICanvas
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 4332661751669918957}
   m_Layer: 0
   m_Name: BaloonParent
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 1515984361002372288}
   m_Layer: 0
   m_Name: Image (1)
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -942,7 +942,7 @@ GameObject:
   - component: {fileID: 1856096804850821948}
   m_Layer: 0
   m_Name: Strings
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -975,7 +975,7 @@ GameObject:
   - component: {fileID: 171762424998558133}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1011,7 +1011,7 @@ GameObject:
   - component: {fileID: 9126237009410583122}
   m_Layer: 0
   m_Name: Collectible
-  m_TagString: Untagged
+  m_TagString: PlayerBallon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1186,6 +1186,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 30518d8d4dc8a1d4588b9cbe94d82141, type: 3}
       propertyPath: m_Name
       value: GEO_chest_v01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 30518d8d4dc8a1d4588b9cbe94d82141, type: 3}
+      propertyPath: m_TagString
+      value: PlayerBallon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
