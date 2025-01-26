@@ -15,7 +15,12 @@ namespace BubbleSalvage
                 // find collectible controller
                 var collectibleController = other.gameObject.GetComponentInParent<CollectibleController>();
                 
-                if (collectibleController == null) return;
+                if (collectibleController == null || 
+                    !collectibleController.IsBalloonAttached)
+                {
+                    return;
+                }
+                
                 
                 // remove force
                 collectibleController.RemoveForce();
