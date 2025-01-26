@@ -28,6 +28,8 @@ namespace BubbleSalvage
         
         Vector3 _lastOxygenContainerPos;
         
+        public float _timeAllowedAfterDeath = 1.5f;
+        
 
         void Awake()
         {
@@ -45,8 +47,16 @@ namespace BubbleSalvage
         {
             if (IsDead)
             {
-                if (Input.anyKeyDown) 
-                    ReloadScene();
+                // wait for delay before we allow key down
+                _timeAllowedAfterDeath -= Time.deltaTime;
+                
+                if (_timeAllowedAfterDeath < 0)
+                {
+                    if (Input.anyKeyDown) 
+                        ReloadScene();
+                    return;
+                }
+
                 return;
             }
             // oxygenDepletion

@@ -39748,15 +39748,15 @@ MonoBehaviour:
   OnDead:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7783282113004695066}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BubbleSalvage.FadeCanvasGroup, Assembly-CSharp
+        m_MethodName: FadeIn
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 0.5
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
@@ -39807,6 +39807,7 @@ MonoBehaviour:
         m_CallState: 2
   OxygenBarMinScale: {x: 1, y: 0, z: 1}
   OxygenBarMaxScale: {x: 1, y: 1, z: 1}
+  _timeAllowedAfterDeath: 1.5
 --- !u!54 &5311591197093705081
 Rigidbody:
   m_ObjectHideFlags: 0
