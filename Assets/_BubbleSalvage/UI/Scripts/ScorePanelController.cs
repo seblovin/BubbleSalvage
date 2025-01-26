@@ -13,19 +13,21 @@ namespace BubbleSalvage
         private int _displayScore;
         private float _currentTimer;
 
+        public int CurrentScore => _currentScore;
+
         private void UpdateScore(CollectibleController collectible)
         {
             if (collectible == null) return;
             if (!collectible.CanScore) return;
             
             _sourceScore = _displayScore;
-            _currentScore += collectible.Score;
+            _currentScore = CurrentScore + collectible.Score;
             collectible.RemoveScore();
         }
 
         private void Update()
         {
-            if (_displayScore == _currentScore)
+            if (_displayScore == CurrentScore)
             {
                 return;
             }
@@ -33,7 +35,7 @@ namespace BubbleSalvage
             // update timer and display score
             _currentTimer += Time.deltaTime;
             // interpolate between display and current with current timer
-            _displayScore = (int)Mathf.Lerp(_sourceScore, _currentScore, _currentTimer / _timeToSync);
+            _displayScore = (int)Mathf.Lerp(_sourceScore, CurrentScore, _currentTimer / _timeToSync);
             _scoreText.text = _displayScore.ToString();
             
             if (_currentTimer >= _timeToSync)

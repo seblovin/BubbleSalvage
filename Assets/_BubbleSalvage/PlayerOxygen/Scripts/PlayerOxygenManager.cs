@@ -1,4 +1,5 @@
 using System;
+using _BubbleSalvage.Sound.Scripts;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
@@ -28,6 +29,11 @@ namespace BubbleSalvage
         
         Vector3 _lastOxygenContainerPos;
         
+        public float _timeAllowedAfterDeath = 1.5f;
+        
+        [Header("Sound")]
+        public float LackOxygenSoundMinimum = 2f;
+        public float LackOxygenSoundInterval = 2f;
 
         void Awake()
         {
@@ -45,8 +51,16 @@ namespace BubbleSalvage
         {
             if (IsDead)
             {
-                if (Input.anyKeyDown) 
-                    ReloadScene();
+                // wait for delay before we allow key down
+                _timeAllowedAfterDeath -= Time.deltaTime;
+                
+                if (_timeAllowedAfterDeath < 0)
+                {
+                    if (Input.anyKeyDown) 
+                        ReloadScene();
+                    return;
+                }
+
                 return;
             }
             // oxygenDepletion
@@ -60,6 +74,19 @@ namespace BubbleSalvage
                 HalfToQuaterOxygen?.Invoke();
             else
                 QuaterToEmptyOxygen?.Invoke();
+            
+            // check if we need to trigger sound
+            if (CurrentOxygen < LackOxygenSoundMinimum)
+            {
+                // increase our interval
+                LackOxygenSoundInterval -= Time.deltaTime;
+
+                if (LackOxygenSoundInterval < 0)
+                {
+                    LackOxygenSoundInterval = LackOxygenSoundMinimum;
+                    SoundManager.Instance.PlaySound("LackOxygen");
+                }
+            }
         }
 
         void UpdateOxygenDepletion()
