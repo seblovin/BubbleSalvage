@@ -26,13 +26,17 @@ namespace BubbleSalvage
 
             if (!_lookAt)
             {
-                transform.DOPath(loopPoints, _moveDuration, PathType.CatmullRom, PathMode.Full3D, 10, Color.red)
+                transform.DOPath(loopPoints, _moveDuration, PathType.CatmullRom, PathMode.Sidescroller2D, 10, Color.red)
+                    .SetSpeedBased()
+                    .SetEase(Ease.Linear)
                     .SetLoops(-1, _loopType);
                 return;
             }
 
-            transform.DOPath(loopPoints.ToArray(), _moveDuration, PathType.CatmullRom, PathMode.Full3D, 10, Color.red)
-                .SetLoops(-1, _loopType).SetLookAt(_lookAtSpeed);
+            transform.DOPath(loopPoints.ToArray(), _moveDuration, PathType.CatmullRom, PathMode.Sidescroller2D, 10, Color.red)
+                .SetSpeedBased()
+                .SetEase(Ease.Linear)
+                .SetLoops(-1, _loopType).SetLookAt(_lookAtSpeed, Vector3.forward);
         }
 
         private void OnDrawGizmos()
