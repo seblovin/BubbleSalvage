@@ -19,9 +19,13 @@ namespace BubbleSalvage
         public Transform OxygenContainerParent;
         public Transform OxygenBar;
         public UnityEvent OnDead;
+        public UnityEvent FullToHalfOxygen;
+        public UnityEvent HalfToQuaterOxygen;
+        public UnityEvent QuaterToEmptyOxygen;
         
         public Vector3 OxygenBarMinScale = new(1, 0, 1);
         public Vector3 OxygenBarMaxScale = new(1, 1, 1);
+        
         Vector3 _lastOxygenContainerPos;
         
 
@@ -48,15 +52,21 @@ namespace BubbleSalvage
             // oxygenDepletion
             UpdateOxygenDepletion();
             UpdateOxygenBar();
+            var oxygenFactor = CurrentOxygen / MaxOxygen;
+            // like probably you wouldnt call this every frame ofc, but aint got no time for that
+            if (oxygenFactor > .5f)
+                FullToHalfOxygen?.Invoke();
+            else if (oxygenFactor > .25f)
+                HalfToQuaterOxygen?.Invoke();
+            else
+                QuaterToEmptyOxygen?.Invoke();
         }
 
         void UpdateOxygenDepletion()
         {
             CurrentOxygen -= OxygenDepletionRate * Time.deltaTime;
-            if (CurrentOxygen < 0)
-            {
+            if (CurrentOxygen < 0) 
                 Die();
-            }
             
         }
 
@@ -86,6 +96,9 @@ namespace BubbleSalvage
 
         public void AddOxygen(float amount)
         {
+            if (IsDead) 
+                return;
+            
             CurrentOxygen = Mathf.Min(MaxOxygen, CurrentOxygen + amount);
         }
     }
