@@ -67,6 +67,7 @@ namespace BubbleSalvage
             _isBalloonAttached = false;
             _uiController.ToggleCanvasActivation(true, false);
             _onBallonRemoved?.Invoke();
+            SoundManager.Instance.PlaySound("BalloonPop");
             _visualEffect.enabled = true;
             _visualEffect?.Play();
         }
