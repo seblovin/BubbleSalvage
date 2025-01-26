@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BubbleSalvage;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class PlayerGunView : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class PlayerGunView : MonoBehaviour
 
     bool _isFiringActive;
     Vector2 _aimDirection;
+    bool _isGamePadActive;
     readonly RaycastHit[] _resultsBuffer = new RaycastHit[20];
     Camera _mainCamera;
 
@@ -28,17 +31,19 @@ public class PlayerGunView : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
-    void OnDrawGizmos() => DrawSphereCastGizmo(transform.position + (Vector3)(_aimDirection.normalized * GunOffset), _aimDirection, GunRadius, GunReach, Color.red);
+    void OnDrawGizmos() => DrawSphereCastGizmo(transform.position + (Vector3)(_aimDirection.normalized * GunOffset),
+        _aimDirection, GunRadius, GunReach, Color.red);
 
     void Update()
     {
+        CheckGamepad();
         var aimDirection = GetAimDirection();
-        if (aimDirection.magnitude > .01f) 
+        if (aimDirection.magnitude > .01f)
             _aimDirection = aimDirection;
-        
+
         transform.rotation = Quaternion.LookRotation(_aimDirection, Vector3.up);
 
-        var firingActive = Input.GetButton("Fire1");
+        var firingActive = GetFiringInputPressed();
 
         if (_isFiringActive != firingActive)
         {
@@ -48,9 +53,37 @@ public class PlayerGunView : MonoBehaviour
         }
     }
 
+    void CheckGamepad()
+    {
+        if (Input.GetJoystickNames().Length < 1)
+        {
+            _isGamePadActive = false;
+            return;
+        }
+
+        if (_isGamePadActive)
+        {
+            if (Keyboard.current?.anyKey.isPressed ?? false)
+            {
+                _isGamePadActive = false;
+            }
+        }
+        else
+        {
+            _isGamePadActive = Gamepad.current?.allControls.Any(c => c.IsPressed()) ?? false;
+        }
+    }
+
+    bool GetFiringInputPressed()
+    {
+        return _isGamePadActive
+            ? _aimDirection.magnitude > .1f 
+            : Input.GetButton("Fire1");
+    }
+
     void FixedUpdate()
     {
-        if (_isFiringActive) 
+        if (_isFiringActive)
             FiringUpdate();
     }
 
@@ -62,7 +95,7 @@ public class PlayerGunView : MonoBehaviour
             _aimDirection.normalized,
             _resultsBuffer,
             GunReach);
-        
+
         if (hits > _resultsBuffer.Length)
         {
             Debug.LogWarning("more results than buffer size..");
@@ -77,8 +110,8 @@ public class PlayerGunView : MonoBehaviour
             var hit = _resultsBuffer[index];
             var hitRigidbody = hit.rigidbody;
 
-            if (hitRigidbody == null || 
-                hitRigidbody.CompareTag(PlayerView.PlayerTag) || 
+            if (hitRigidbody == null ||
+                hitRigidbody.CompareTag(PlayerView.PlayerTag) ||
                 !pushedRigidbodies.Add(hitRigidbody))
             {
                 continue;
@@ -93,11 +126,12 @@ public class PlayerGunView : MonoBehaviour
 
     Vector2 GetAimDirection()
     {
-        if (Input.GetJoystickNames().Length > 0)
+        if (_isGamePadActive)
         {
             var vertical = Input.GetAxis("LookVertical");
             var horizontal = Input.GetAxis("LookHorizontal");
-            return new Vector2(horizontal, vertical).normalized;
+            var vector2 = new Vector2(horizontal, vertical);
+            return vector2.magnitude > .1f ? vector2.normalized : _aimDirection.normalized * .05f; // i feel dirty
         }
 
         var mouseRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -126,7 +160,9 @@ public class PlayerGunView : MonoBehaviour
         Vector3 offset = Vector3.Cross(direction.normalized, Vector3.up).normalized * radius;
         Gizmos.DrawLine(origin + offset, endPoint + offset);
         Gizmos.DrawLine(origin - offset, endPoint - offset);
-        Gizmos.DrawLine(origin + Vector3.Cross(offset, direction.normalized), endPoint + Vector3.Cross(offset, direction.normalized));
-        Gizmos.DrawLine(origin - Vector3.Cross(offset, direction.normalized), endPoint - Vector3.Cross(offset, direction.normalized));
+        Gizmos.DrawLine(origin + Vector3.Cross(offset, direction.normalized),
+            endPoint + Vector3.Cross(offset, direction.normalized));
+        Gizmos.DrawLine(origin - Vector3.Cross(offset, direction.normalized),
+            endPoint - Vector3.Cross(offset, direction.normalized));
     }
 }
