@@ -45,6 +45,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSounds:
-  - Name: BuubleGun
-    Clip: {fileID: 8300000, guid: a349f2f451d5d4c4c86382483e8cb957, type: 3}
-    Loop: 1
+  - _name: BuubleGun
+    _clip: {fileID: 8300000, guid: a349f2f451d5d4c4c86382483e8cb957, type: 3}
+    _loop: 0
+    _playAtAwake: 0
+    _volume: 0.5
+  - _name: Background
+    _clip: {fileID: 8300000, guid: 9ff44802a95dbae4596aadf3f023f780, type: 3}
+    _loop: 1
+    _playAtAwake: 1
+    _volume: 0.5
+  - _name: Background2
+    _clip: {fileID: 8300000, guid: 70a1882f8c0b9a147b19137bd5378e34, type: 3}
+    _loop: 1
+    _playAtAwake: 1
+    _volume: 1
+  _randomizedGameSounds:
+  - _name: BalloonInflate
+    _clips:
+    - {fileID: 8300000, guid: ffc2b091ac9a07f46947b7d1bed673c6, type: 3}
+    - {fileID: 8300000, guid: e358337039582c24f9fcadf0bd964453, type: 3}
+    - {fileID: 8300000, guid: 4fbb5ecdea2afe64292202effa4f7103, type: 3}
+    - {fileID: 8300000, guid: deef290fe7e917b418e1d619371b30b0, type: 3}
+    - {fileID: 8300000, guid: 6cf76a202e76402429942af7e57689cd, type: 3}
+    _loop: 0
+    _playAtAwake: 0
+    _volume: 0.7

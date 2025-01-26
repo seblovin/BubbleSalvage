@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace BubbleSalvage
@@ -7,23 +6,44 @@ namespace BubbleSalvage
     public class ScorePanelController : MonoBehaviour
     {
         [SerializeField] private TMP_Text _scoreText;
-        [SerializeField] private string _scorePrefix;
-        [SerializeField] private string _scoreSuffix = "$";
+        [SerializeField] private int _timeToSync;
+       
         private int _currentScore;
+        private int _sourceScore;
+        private int _displayScore;
+        private float _currentTimer;
 
         private void UpdateScore(CollectibleController collectible)
         {
             if (collectible == null) return;
             if (!collectible.CanScore) return;
-
+            
+            _sourceScore = _displayScore;
             _currentScore += collectible.Score;
-            _scoreText.text = _scorePrefix + _currentScore + _scoreSuffix;
             collectible.RemoveScore();
+        }
+
+        private void Update()
+        {
+            if (_displayScore == _currentScore)
+            {
+                return;
+            }
+            
+            // update timer and display score
+            _currentTimer += Time.deltaTime;
+            // interpolate between display and current with current timer
+            _displayScore = (int)Mathf.Lerp(_sourceScore, _currentScore, _currentTimer / _timeToSync);
+            _scoreText.text = _displayScore.ToString();
+            
+            if (_currentTimer >= _timeToSync)
+            {
+                _currentTimer = 0;
+            }
         }
 
         private void Awake()
         {
-            _scoreText.text = _scorePrefix + "0" + _scoreSuffix;
             // subscribe to collectible controller event
             CollectibleController.OnHeightReached.AddListener(UpdateScore);
         }
