@@ -10,7 +10,7 @@ namespace BubbleSalvage
 
             if (other.attachedRigidbody == null) return;
 
-            if (other.attachedRigidbody.tag == "PlayerBallon")
+            if (other.attachedRigidbody.CompareTag("PlayerBallon"))
             {
                 // find collectible controller
                 var collectibleController = other.gameObject.GetComponentInParent<CollectibleController>();
