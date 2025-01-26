@@ -39554,6 +39554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7348634f59fc466c9edc9d8ce5ea342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerView: {fileID: 7783567150701904642}
   GunRadius: 0.5
   GunReach: 5
   GunOffset: 0
