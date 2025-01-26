@@ -84,6 +84,7 @@ namespace BubbleSalvage
             {
                 OnHeightReached?.Invoke(this);
                 transform.DOScale(Vector3.zero, 1f).onComplete = () => Destroy(gameObject);
+                _onHeightReached?.Invoke();
                 enabled = false;
             }
 
