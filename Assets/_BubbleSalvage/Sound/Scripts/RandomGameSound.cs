@@ -10,7 +10,7 @@ namespace _BubbleSalvage.Sound.Scripts
         [SerializeField] private AudioClip[] _clips;
         [SerializeField] private bool _loop;
         [SerializeField] private bool _playAtAwake;
-        [SerializeField] private float _volume;
+        [SerializeField, Range(0f, 1f)] private float _volume;
 
         public string Name => _name;
 

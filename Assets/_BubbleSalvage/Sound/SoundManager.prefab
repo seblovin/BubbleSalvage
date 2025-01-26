@@ -54,6 +54,11 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 9ff44802a95dbae4596aadf3f023f780, type: 3}
     _loop: 1
     _playAtAwake: 1
+    _volume: 0.5
+  - _name: Background2
+    _clip: {fileID: 8300000, guid: 70a1882f8c0b9a147b19137bd5378e34, type: 3}
+    _loop: 1
+    _playAtAwake: 1
     _volume: 1
   _randomizedGameSounds:
   - _name: BalloonInflate

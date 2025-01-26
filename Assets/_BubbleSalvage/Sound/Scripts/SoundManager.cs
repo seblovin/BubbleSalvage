@@ -49,14 +49,23 @@ namespace _BubbleSalvage.Sound.Scripts
                     PlaySound(gameSound.Name);
                 }
             }
+            
+            foreach (var gameSound in _randomizedGameSounds)
+            {
+                if (gameSound.PlayAtAwake)
+                {
+                    PlaySound(gameSound.Name);
+                }
+            }
         }
 
-        public void PlaySound(AudioClip clip, bool loop = false)
+        public void PlaySound(AudioClip clip, bool loop = false, float volume = 1f)
         {
             GameObject soundSource = new GameObject("SoundSource");
             AudioSource audioSource = soundSource.AddComponent<AudioSource>();
             audioSource.clip = clip;
             audioSource.loop = loop;
+            audioSource.volume = volume;
             audioSource.Play();
             _soundSources.Add(soundSource);
 
@@ -82,7 +91,7 @@ namespace _BubbleSalvage.Sound.Scripts
                 gameSound = randomGameSound;
             }
 
-            PlaySound(gameSound.Clip, gameSound.Loop);
+            PlaySound(gameSound.Clip, gameSound.Loop, gameSound.Volume);
         }
 
         // stop sound
