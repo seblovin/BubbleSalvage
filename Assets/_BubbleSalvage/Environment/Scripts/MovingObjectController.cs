@@ -10,6 +10,7 @@ namespace BubbleSalvage
         [SerializeField] public float _moveDuration;
         [SerializeField] public LoopType _loopType;
         [SerializeField] public bool _lookAt;
+        [SerializeField] private float _lookAtSpeed;
         [SerializeField] public List<Transform> targets;
 
         private void Start()
@@ -31,7 +32,7 @@ namespace BubbleSalvage
             }
 
             transform.DOPath(loopPoints.ToArray(), _moveDuration, PathType.CatmullRom, PathMode.Full3D, 10, Color.red)
-                .SetLoops(-1, _loopType).SetLookAt(0.01f);
+                .SetLoops(-1, _loopType).SetLookAt(_lookAtSpeed);
         }
 
         private void OnDrawGizmos()

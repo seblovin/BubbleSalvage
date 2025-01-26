@@ -51,7 +51,7 @@ MonoBehaviour:
     _playAtAwake: 0
     _volume: 0.5
   - _name: Background
-    _clip: {fileID: 8300000, guid: 9ff44802a95dbae4596aadf3f023f780, type: 3}
+    _clip: {fileID: 8300000, guid: 4809a4124c3dc7648a6c6260035a5045, type: 3}
     _loop: 1
     _playAtAwake: 0
     _volume: 0.5
