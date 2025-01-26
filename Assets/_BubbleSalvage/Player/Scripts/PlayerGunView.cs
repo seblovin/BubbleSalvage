@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using BubbleSalvage;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -10,6 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerGunView : MonoBehaviour
 {
     readonly Plane _inputPlane = new(Vector3.forward, Vector3.zero);
+    public PlayerView PlayerView;
     public float GunRadius = .5f;
     public float GunReach = 5f;
     public float GunOffset = .5f;
@@ -76,9 +76,12 @@ public class PlayerGunView : MonoBehaviour
 
     bool GetFiringInputPressed()
     {
-        return _isGamePadActive
-            ? _aimDirection.magnitude > .1f 
-            : Input.GetButton("Fire1");
+        if (_isGamePadActive)
+        {
+            return (Gamepad.current?.rightTrigger?.isPressed ?? false) || _aimDirection.magnitude > .1f;
+        }
+
+        return Input.GetButton("Fire1");
     }
 
     void FixedUpdate()
@@ -131,7 +134,20 @@ public class PlayerGunView : MonoBehaviour
             var vertical = Input.GetAxis("LookVertical");
             var horizontal = Input.GetAxis("LookHorizontal");
             var vector2 = new Vector2(horizontal, vertical);
-            return vector2.magnitude > .1f ? vector2.normalized : _aimDirection.normalized * .05f; // i feel dirty
+
+            if (vector2.magnitude > .1f)
+            {
+                return vector2.normalized;
+            }
+
+            var playerForward = PlayerView.transform.forward;
+            playerForward.z = 0;
+            if (playerForward.magnitude > .05f)
+            {
+                return playerForward.normalized * .05f;
+            }
+
+            return _aimDirection.normalized * .05f;
         }
 
         var mouseRay = _mainCamera.ScreenPointToRay(Input.mousePosition);

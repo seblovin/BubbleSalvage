@@ -39554,6 +39554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7348634f59fc466c9edc9d8ce5ea342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerView: {fileID: 7783567150701904642}
   GunRadius: 0.5
   GunReach: 5
   GunOffset: 0
@@ -40164,8 +40165,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.9411765, g: 0.5803922, b: 1, a: 1}
-      maxColor: {r: 0.4117647, g: 1, b: 1, a: 1}
+      minColor: {r: 0.97996897, g: 0.8537736, b: 1, a: 1}
+      maxColor: {r: 0.6462264, g: 1, b: 0.97092277, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -44784,7 +44785,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3be8ddfefd82d4c46aacf35c0e709d9d, type: 2}
+  - {fileID: 2100000, guid: 411e302850f914d9aa51d323edfaa2da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
