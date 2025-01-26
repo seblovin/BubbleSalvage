@@ -102,7 +102,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &27985341768775074
 Transform:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8662658575084104724}
-  m_Father: {fileID: 3414169491390403893}
+  m_Father: {fileID: 4332661751669918957}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2433258874942731115
 GameObject:
@@ -967,7 +967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4332661751669918957
 Transform:
   m_ObjectHideFlags: 0
@@ -982,6 +982,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 27985341768775074}
+  - {fileID: 2191903500814533262}
   m_Father: {fileID: 3414169491390403893}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8226662251556995158
@@ -1161,7 +1162,6 @@ Transform:
   - {fileID: 7309072148655224813}
   - {fileID: 171762424998558133}
   - {fileID: 4332661751669918957}
-  - {fileID: 2191903500814533262}
   - {fileID: 8327604123129379359}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1228,7 +1228,8 @@ MonoBehaviour:
   _uiController: {fileID: 6036856792988340863}
   _constantForce: {fileID: 9126237009410583122}
   _score: 500
-  _ballon: {fileID: 7947368859010312903}
+  _ballon: {fileID: 1408892472988929242}
+  _ballonRotationPivot: {fileID: 4332661751669918957}
   _heightToScore: 20
   _oxygenRequiredToAttach: 1
   _onHeightReached:

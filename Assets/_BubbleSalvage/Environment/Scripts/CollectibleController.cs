@@ -14,6 +14,7 @@ namespace BubbleSalvage
         [SerializeField] private ConstantForce _constantForce;
         [SerializeField] private int _score;
         [SerializeField] private GameObject _ballon;
+        [SerializeField] private Transform _ballonRotationPivot;
         [SerializeField] private float _heightToScore;
         [SerializeField] private float _oxygenRequiredToAttach = 1f;
         [SerializeField] private UnityEvent _onHeightReached;
@@ -38,7 +39,7 @@ namespace BubbleSalvage
 
         void LateUpdate()
         {
-            _ballon.transform.rotation = Quaternion.identity;
+            _ballonRotationPivot.transform.rotation = Quaternion.identity;
         }
 
         public bool IsBalloonAttached => _isBalloonAttached;
