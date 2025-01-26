@@ -50,7 +50,7 @@ namespace _BubbleSalvage.Sound.Scripts
                     PlaySound(gameSound.Name);
                 }
             }
-            
+
             foreach (var gameSound in _randomizedGameSounds)
             {
                 if (gameSound.PlayAtAwake)
@@ -67,7 +67,7 @@ namespace _BubbleSalvage.Sound.Scripts
             {
                 return;
             }
-            
+
             GameObject soundSource = new GameObject("SoundSource");
             AudioSource audioSource = soundSource.AddComponent<AudioSource>();
             audioSource.clip = clip;
@@ -78,7 +78,7 @@ namespace _BubbleSalvage.Sound.Scripts
 
             // reparent sound sources to sound manager
             soundSource.transform.SetParent(transform);
-            
+
             // if not looping stop on audio clip end
             if (!loop)
             {
@@ -90,7 +90,7 @@ namespace _BubbleSalvage.Sound.Scripts
         {
             // wait for delay
             yield return new WaitForSeconds(delayToStop);
-            
+
             while (audioSource.isPlaying)
             {
                 yield return null;
@@ -99,7 +99,12 @@ namespace _BubbleSalvage.Sound.Scripts
             StopSound(audioSource.clip);
         }
 
-        public void PlaySound(string name, float delayToStop = 0f)
+        public void PlaySound(string name)
+        {
+            PlaySound(name, 0f);
+        }
+
+        public void PlaySound(string name, float delayToStop)
         {
             IGameSound gameSound = Array.Find(_gameSounds, sound => sound.Name == name);
 
@@ -113,7 +118,7 @@ namespace _BubbleSalvage.Sound.Scripts
                     Debug.LogWarning("Sound: " + name + " not found!");
                     return;
                 }
-                
+
                 gameSound = randomGameSound;
             }
 
@@ -151,7 +156,7 @@ namespace _BubbleSalvage.Sound.Scripts
                     Debug.LogWarning("Sound: " + name + " not found!");
                     return;
                 }
-                
+
                 gameSound = randomGameSound;
             }
 

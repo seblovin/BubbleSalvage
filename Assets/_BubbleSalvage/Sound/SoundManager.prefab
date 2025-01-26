@@ -60,6 +60,11 @@ MonoBehaviour:
     _loop: 1
     _playAtAwake: 0
     _volume: 1
+  - _name: Death
+    _clip: {fileID: 8300000, guid: 4fa83d3cd9daef54da06562e85df3a7f, type: 3}
+    _loop: 0
+    _playAtAwake: 0
+    _volume: 0.7
   _randomizedGameSounds:
   - _name: BalloonInflate
     _clips:
