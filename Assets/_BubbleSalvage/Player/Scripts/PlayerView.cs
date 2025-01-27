@@ -19,6 +19,7 @@ namespace BubbleSalvage
         public UnityEvent OnIdle;
         public UnityEvent OnMoving;
 
+        [SerializeField]
         Vector2 _currentMoveDirection;
         bool _isIdle;
 
@@ -38,9 +39,16 @@ namespace BubbleSalvage
                 velocity.y = Mathf.Min(velocity.y, 0);
                 RBody.linearVelocity = velocity;
             }
+            
+            RotationUpdate();
         }
 
-        void Update()
+        // void Update()
+        // {
+        //     RotationUpdate();
+        // }
+
+        void RotationUpdate()
         {
             if (PlayerOxygenManager.IsDead)
                 return;
@@ -65,9 +73,10 @@ namespace BubbleSalvage
                 lookUp += moveY > 0 ? moveY * Vector3.forward : -moveY * Vector3.back;
                 targetRotation = Quaternion.LookRotation(_currentMoveDirection, lookUp.normalized);
             }
-
+            
             var lerpedRotation = Quaternion.Lerp(idleRotation, targetRotation, moveMagnitude);
-            transform.rotation = Quaternion.Lerp(transform.rotation, lerpedRotation, RotationSpeed * Time.deltaTime);
+            var lerpValue = RotationSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.Lerp(transform.rotation, lerpedRotation, lerpValue);
 
             if (isIdle != _isIdle)
             {
@@ -86,6 +95,12 @@ namespace BubbleSalvage
 
         static Vector2 GetInputVector()
         {
+            if (MobileInputController.IsActive)
+            {
+                var joystick = MobileInputController.Instance.LeftJoystick;
+                return joystick.Direction;
+            }
+
             var moveHorizontal = Input.GetAxis("Horizontal");
             var moveVertical = Input.GetAxis("Vertical");
             return Vector2.ClampMagnitude(new Vector2(moveHorizontal, moveVertical), 1);

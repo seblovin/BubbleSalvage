@@ -56,8 +56,11 @@ namespace BubbleSalvage
                 
                 if (_timeAllowedAfterDeath < 0)
                 {
-                    if (Input.anyKeyDown) 
+                    if (Input.anyKeyDown || 
+                        MobileInputController.IsActive || MobileInputController.Instance.IsPressing)
+                    {
                         ReloadScene();
+                    }
                     return;
                 }
 

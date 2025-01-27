@@ -29,6 +29,7 @@ public class PlayerGunView : MonoBehaviour
     void Awake()
     {
         _mainCamera = Camera.main;
+        _aimDirection = Vector2.right;
     }
 
     void OnDrawGizmos() => DrawSphereCastGizmo(transform.position + (Vector3)(_aimDirection.normalized * GunOffset),
@@ -55,6 +56,11 @@ public class PlayerGunView : MonoBehaviour
 
     void CheckGamepad()
     {
+        if (MobileInputController.IsActive)
+        {
+            _isGamePadActive = true;
+            return;
+        }
         if (Input.GetJoystickNames().Length < 1)
         {
             _isGamePadActive = false;
@@ -76,6 +82,10 @@ public class PlayerGunView : MonoBehaviour
 
     bool GetFiringInputPressed()
     {
+        if (MobileInputController.IsActive)
+        {
+            return _aimDirection.magnitude > .1f;
+        }
         if (_isGamePadActive)
         {
             return (Gamepad.current?.rightTrigger?.isPressed ?? false) || _aimDirection.magnitude > .1f;
@@ -129,6 +139,14 @@ public class PlayerGunView : MonoBehaviour
 
     Vector2 GetAimDirection()
     {
+        if (MobileInputController.IsActive)
+        {
+            var current = MobileInputController.Instance.RightJoystick.Direction;
+            if (current.magnitude > .05f)
+                return current;
+            return _aimDirection.normalized * .05f;
+        }
+        
         if (_isGamePadActive)
         {
             var vertical = Input.GetAxis("LookVertical");

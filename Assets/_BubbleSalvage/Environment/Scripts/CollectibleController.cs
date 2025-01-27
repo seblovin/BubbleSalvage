@@ -27,6 +27,10 @@ namespace BubbleSalvage
 
         public static UnityEvent<CollectibleController> OnHeightReached = new();
 
+        public static bool IsAttachInputDown =>
+            Input.GetButtonDown("Jump") ||
+            MobileInputController.Instance.IsPressing;
+
         public int Score
         {
             get => _score;
@@ -89,7 +93,7 @@ namespace BubbleSalvage
                 enabled = false;
             }
 
-            if (_uiController.IsVisible && !IsBalloonAttached && Input.GetButtonDown("Jump"))
+            if (_uiController.IsVisible && !IsBalloonAttached && IsAttachInputDown)
             {
                 Raise(15);
                 AttachBalloon();

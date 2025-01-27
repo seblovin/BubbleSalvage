@@ -39557,7 +39557,7 @@ MonoBehaviour:
   PlayerView: {fileID: 7783567150701904642}
   GunRadius: 0.5
   GunReach: 5
-  GunOffset: 0
+  GunOffset: -0.5
   GunStrengthMax: 15
   GunStrengthMin: 5
   SetFiringActive:
