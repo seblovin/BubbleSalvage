@@ -95,6 +95,8 @@ namespace _BubbleSalvage.Sound.Scripts
             {
                 yield return null;
             }
+            
+            if (audioSource == null) yield break;
 
             StopSound(audioSource.clip);
         }
