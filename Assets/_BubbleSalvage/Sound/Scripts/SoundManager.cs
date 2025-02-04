@@ -91,7 +91,7 @@ namespace _BubbleSalvage.Sound.Scripts
             // wait for delay
             yield return new WaitForSeconds(delayToStop);
 
-            while (audioSource.isPlaying)
+            while (audioSource != null && audioSource.isPlaying)
             {
                 yield return null;
             }
@@ -157,7 +157,8 @@ namespace _BubbleSalvage.Sound.Scripts
                     return;
                 }
 
-                gameSound = randomGameSound;
+                StopSound(randomGameSound.LastClip);
+                return;
             }
 
             StopSound(gameSound.Clip);

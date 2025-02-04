@@ -26,6 +26,8 @@ namespace BubbleSalvage
         private bool _isBalloonAttached = false;
 
         public static UnityEvent<CollectibleController> OnHeightReached = new();
+        
+        private static int _balloonAttachmentControl = 0;
 
         public int Score
         {
@@ -50,16 +52,19 @@ namespace BubbleSalvage
             _constantForce.force = new Vector3(0, force, 0);
         }
 
-        public void AttachBalloon()
+        public bool AttachBalloon()
         {
-            if (PlayerOxygenManager.Instance.TryConsumeOxygen(_oxygenRequiredToAttach))
+            if (_balloonAttachmentControl <= 0 && PlayerOxygenManager.Instance.TryConsumeOxygen(_oxygenRequiredToAttach))
             {
                 _ballon.gameObject.SetActive(true);
                 _isBalloonAttached = true;
                 _uiController.ToggleCanvasActivation(false);
                 SoundManager.Instance.PlaySound("BalloonInflate");
                 _onBallonAttached?.Invoke();
+                return true;
             }
+
+            return false;
         }
 
         public void RemoveBalloon()
@@ -91,8 +96,13 @@ namespace BubbleSalvage
 
             if (_uiController.IsVisible && !IsBalloonAttached && Input.GetButtonDown("Jump"))
             {
-                Raise(15);
-                AttachBalloon();
+                if (AttachBalloon())
+                {
+                    Raise(15);
+                    // restore control value and wait for a certain time before next balloon attachment
+                    _balloonAttachmentControl = 1;
+                    DOVirtual.Int(1, 0, .25f, value => _balloonAttachmentControl = value);
+                }
             }
         }
 
