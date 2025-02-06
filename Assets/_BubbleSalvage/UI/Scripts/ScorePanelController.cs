@@ -36,7 +36,7 @@ namespace BubbleSalvage
             _currentTimer += Time.deltaTime;
             // interpolate between display and current with current timer
             _displayScore = (int)Mathf.Lerp(_sourceScore, CurrentScore, _currentTimer / _timeToSync);
-            _scoreText.text = _displayScore.ToString();
+            _scoreText.text = $"{_displayScore}$";
             
             if (_currentTimer >= _timeToSync)
             {
