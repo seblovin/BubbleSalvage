@@ -96,6 +96,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 4771536353340111877, guid: 2bbe8fc69df92410198c2b91085a9bb6, type: 3}
     - {fileID: 484461799530434668, guid: 2bbe8fc69df92410198c2b91085a9bb6, type: 3}
+    - {fileID: 8156404954375598766, guid: 2bbe8fc69df92410198c2b91085a9bb6, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7626372501424197327, guid: 2bbe8fc69df92410198c2b91085a9bb6, type: 3}
       insertIndex: 0
@@ -183,13 +184,77 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.0017
       objectReference: {fileID: 0}
+    - target: {fileID: 5955082253409555167, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955082253409555167, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Name
+      value: CollisionSphere_radius
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955082253409555167, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955082253409555167, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Overridden
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6164045678785131171, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6919870893462772385}
+    - targetCorrespondingSourceObject: {fileID: 6164045678785131171, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9201211128796470534}
   m_SourcePrefab: {fileID: 100100000, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
 --- !u!4 &3618131025664144367 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2665401349878315818, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
+  m_PrefabInstance: {fileID: 1642484109447006405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4845961686174464614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6164045678785131171, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
+  m_PrefabInstance: {fileID: 1642484109447006405}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6919870893462772385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4845961686174464614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExecuteInEditor: 1
+  m_Bindings:
+  - {fileID: 9201211128796470534}
+  m_VisualEffect: {fileID: 4931429885876214298}
+--- !u!114 &9201211128796470534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4845961686174464614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c2aeefddc9e3a45b2f26b062d6be5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Space: 0
+  m_Property:
+    m_Name: CollisionSphere
+  Target: {fileID: 0}
+--- !u!2083052967 &4931429885876214298 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 5955082253409555167, guid: bf5c2d65ac86b4f4ab6338ac39682f5c, type: 3}
   m_PrefabInstance: {fileID: 1642484109447006405}
   m_PrefabAsset: {fileID: 0}
