@@ -120,13 +120,14 @@ Material:
     - _B_LOAD_NORM_TEX: 0
     - _B_LOAD_POS_TWO_TEX: 0
     - _B_UNLOAD_ROT_TEX: 0
-    - _B_autoPlayback: 1
-    - _B_interpolate: 0
+    - _B_autoPlayback: 0
+    - _B_interpolate: 1
     - _B_interpolateCol: 0
     - _B_interpolateSpareCol: 0
     - _B_surfaceNormals: 1
     - _B_twoSidedNorms: 0
     - _BumpScale: 1
+    - _Contrast: 1.89
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -143,7 +144,9 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Transition: 0.38
     - _UVSec: 0
+    - _Up_Value: 0.1
     - _ZWrite: 1
     - _boundMaxX: 0.1
     - _boundMaxY: -0.2
@@ -157,7 +160,9 @@ Material:
     - _houdiniFPS: 24
     - _playbackSpeed: 0.8
     m_Colors:
-    - _Color: {r: 2.639016, g: 0.8290102, b: 0, a: 1}
+    - _Color: {r: 2.74456, g: 0.79881454, b: 0, a: 1}
+    - _Color2: {r: 1, g: 0.89584434, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Top_Color_Vector: {r: 25.2, g: 30.93, b: 1, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

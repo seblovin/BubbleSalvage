@@ -5,6 +5,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.VFX;
+using System.Collections;
 
 namespace BubbleSalvage
 {
@@ -14,6 +15,7 @@ namespace BubbleSalvage
         [SerializeField] private ConstantForce _constantForce;
         [SerializeField] private int _score;
         [SerializeField] private GameObject _ballon;
+        [SerializeField] private GameObject _ballon_Explosion;
         [SerializeField] private Transform _ballonRotationPivot;
         [SerializeField] private float _heightToScore;
         [SerializeField] private float _oxygenRequiredToAttach = 1f;
@@ -24,6 +26,7 @@ namespace BubbleSalvage
 
         private bool _canScore = true;
         private bool _isBalloonAttached = false;
+        public string PositionPropertyName = "VFXPosition";
 
         public static UnityEvent<CollectibleController> OnHeightReached = new();
         
@@ -70,13 +73,25 @@ namespace BubbleSalvage
         public void RemoveBalloon()
         {
             _ballon.gameObject.SetActive(false);
+            _ballon_Explosion.gameObject.SetActive(true);
             _isBalloonAttached = false;
             _uiController.ToggleCanvasActivation(true, false);
             _onBallonRemoved?.Invoke();
             SoundManager.Instance.PlaySound("BalloonPop");
             _visualEffect.enabled = true;
+            _visualEffect.SetVector3(PositionPropertyName, transform.position);
             _visualEffect?.Play();
+
+            StartCoroutine(DeactivateExplosionAfterDelay(3.8f));
+            // Temporarily detach the _ballon_Explosion from its parent
+            _ballon_Explosion.transform.position = transform.position;
+            _ballon_Explosion.transform.SetParent(null);
         }
+        private IEnumerator DeactivateExplosionAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Wait for the specified delay
+        _ballon_Explosion.gameObject.SetActive(false); // Deactivate the explosion
+    }
 
         public void RemoveForce()
         {
