@@ -6839,6 +6839,10 @@ PrefabInstance:
       value: Fish
       objectReference: {fileID: 0}
     - target: {fileID: 8315385636435696772, guid: fa4b483fedf422d4d9c919a371cf7478, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315385636435696772, guid: fa4b483fedf422d4d9c919a371cf7478, type: 3}
       propertyPath: moveDistance
       value: -20
       objectReference: {fileID: 0}
